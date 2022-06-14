@@ -1,0 +1,7 @@
+Poplation app
+- create-react-appで環境構築
+- RESAS APIつなぐ
+- APIから情報取得/表示
+- CSSでスタイリングして県名表示
+- Highcharts Reactインストールして選択された県の情報表示の実装
+- 

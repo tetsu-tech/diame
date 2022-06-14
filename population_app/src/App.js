@@ -1,12 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+// import { Graph } from "./components/Graph";
+import { Main } from "./components/Main";
+import Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
 
-function App() {
+export default function App() {
+  const options = {
+    title: {
+      text: "My chart",
+    },
+    series: [
+      {
+        data: [1, 2, 3],
+      },
+    ],
+  };
   return (
     <div>
-      <h1>hello</h1>
+      <HighchartsReact highcharts={Highcharts} options={options} />
+      <Main />
     </div>
   );
 }
-
-export default App;
