@@ -8,8 +8,13 @@
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
+    "dotenv": "^16.0.1",
+    "dotenv-webpack": "^7.1.0",
+    "fs": "0.0.1-security",
     "highcharts": "^10.1.0",
     "highcharts-react-official": "^3.1.0",
+    "os": "^0.1.2",
+    "path": "^0.12.7",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-scripts": "5.0.1",
@@ -38,5 +43,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "react-app-rewired": "^2.2.1"
   }
 }
