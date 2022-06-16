@@ -1,16 +1,14 @@
 import React from "react";
 
-export const Checkfield = ({ prefectures }) => {
+export const Checkfield = (props) => {
   return (
-    <>
-      <div>
-        {/* {prefectures.map((prefecture) => (
-          <div key={prefecture.prefName} >
-            <input type="checkbox" name="Prefecture Name" />
-            <label>{prefecture.prefName}</label>
-          </div>
-        ))} */}
-      </div>
-    </>
+    <div>
+      {props.prefectures.map((prefecture) => (
+        <div key={prefecture.prefCode} >
+          <input type="checkbox" name="Prefecture Name" />
+          <label>{prefecture.prefName}</label>
+        </div>
+      ))}
+    </div>
   );
 };

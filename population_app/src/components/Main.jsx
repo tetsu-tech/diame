@@ -9,19 +9,17 @@ export const Main = () => {
   //都道府県の一覧の取得
   useEffect(()=>{
       axios.get("https://opendata.resas-portal.go.jp/api/v1/prefectures",{
-          headers:{'X-API-KEY':API_KEY},
+          headers:{'X-API-KEY': API_KEY},
       })
       .then((res)=>{
-        setPrefectures(res.data);
+        setPrefectures(res.data.result);
       })
       .catch((error)=>{})
   }, [])
 
-
   return (
     <>
-      {/* <Checkfield prefectures={prefectures.result} /> */}
-      <div>hogehgoe</div>
+      <Checkfield prefectures={prefectures} />
     </>
   )
 }
