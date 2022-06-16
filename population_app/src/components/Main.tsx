@@ -10,7 +10,7 @@ interface Prefecture {
   prefName: String;
 };
 
-export const Main: React.FC = () => {
+export const Main: React.FC<Props> = (props: Props) => {
   const API_KEY = process.env.REACT_APP_RESAS_API_KEY;
   const [prefectures, setPrefectures] = useState<Prefecture[]>([]); //県名初期化
   
