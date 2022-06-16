@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { Checkfield } from './CheckField';
+import { Test } from './Test';
 
 export const Main = () => {
   const API_KEY = process.env.REACT_APP_RESAS_API_KEY;
@@ -21,7 +22,8 @@ export const Main = () => {
   return (
     <>
       {/* <Checkfield prefectures={prefectures.result} /> */}
-      <div>hogehgoe</div>
+      {/* テスト用のコンポーネントのため、後で消す */}
+      <Test />
     </>
   )
 }
