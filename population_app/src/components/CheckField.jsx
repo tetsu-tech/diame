@@ -4,50 +4,24 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 
 export const Checkfield = (props) => {
-  //API KEY取得
   const API_KEY = process.env.REACT_APP_RESAS_API_KEY;
-  //人口データ
+
+  const [prefectures, setPrefectures] = useState([]); 
   const [prefPopulation, setPrefPopulation] = useState([]);
 
-  // 人口データ取得
-  // useEffect((prefName) => {
-  //   axios
-  //     .get(
-  //       " https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear?prefCode=11",
-  //       {
-  //         headers: { "X-API-KEY": API_KEY },
-  //       }
-  //     )
-  //     .then((res) => {
-  //       setPrefPopulation(res.data.result.data[0].data);
-  //     })
-  //     .catch((error) => {});
-  // }, []);
-  // 人口のグラフの配列を作る（年year・人口データ）
+  //都道府県の一覧の取得
+  useEffect(() => {
+    axios
+      .get("https://opendata.resas-portal.go.jp/api/v1/prefectures", {
+        headers: { "X-API-KEY": API_KEY },
+      })
+      .then((res) => {
+        setPrefectures(res.data.result);
+      })
+      .catch((error) => {});
+  }, [API_KEY]);
 
-  // const c_prefPopulation = prefPopulation.slice(); //コピーの作成
-  // //Highchartsに代入するため年を配列で取り出す
-  // let years = []; //yearの配列
-  // c_prefPopulation.forEach((data) => {
-  //   years.push(data.year);
-  // });
-  // // console.log(years) //c_prefPopulationではなくyearsであることに注意
-
-  // //年と対応した人口を配列で取り出す
-  // let populations = []; //空配列
-  // c_prefPopulation.forEach((data) => {
-  //   populations.push(data.value);
-  // });
-  // // console.log(populations) //c_prefPopulationではなくyearsであることに注意
-
-  // //人口データグラフ変数
-  // const chartOptions = {
-  //   xAxis: {
-  //     categories: years,
-  //   },
-  //   series: [{ data: populations }],
-  // };
-
+  
   //clickされたチェックボックスのprefCodeを取得してURLに代入し、prefPopulationにsetする関数
   const handleClickCheckbox = (value) => {
     const prefURL = `https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear?prefCode=${value}`;
@@ -60,32 +34,30 @@ export const Checkfield = (props) => {
   };
 
   const c_prefPopulation = prefPopulation.slice(); //コピーの作成
+
   //Highchartsに代入するため年を配列で取り出す
   let years = []; //yearの配列
   c_prefPopulation.forEach((data) => {
     years.push(data.year);
   });
-  // console.log(years) //c_prefPopulationではなくyearsであることに注意
 
   //年と対応した人口を配列で取り出す
   let populations = []; //空配列
   c_prefPopulation.forEach((data) => {
     populations.push(data.value);
   });
-  // console.log(populations) //c_prefPopulationではなくyearsであることに注意
 
-  //人口データグラフ変数
+  //Highchartaのグラフ変数
   const chartOptions = {
     xAxis: {
       categories: years,
     },
     series: [{ data: populations }],
   };
-  //prefPopulationをもとに
-  //prefCodeをaxiosのgetのURLのクエリ部分に代入
+  
   return (
     <div>
-      {props.prefectures.map((prefecture) => (
+      {prefectures.map((prefecture) => (
         <div key={prefecture.prefCode}>
           <input
             type="checkbox"
