@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import '../App.css'
 
 export const Checkfield = (props) => {
   const API_KEY = process.env.REACT_APP_RESAS_API_KEY;
@@ -54,12 +55,13 @@ export const Checkfield = (props) => {
     },
     series: [{ data: populations }],
   };
-  
+
   return (
     <div>
       {prefectures.map((prefecture) => (
-        <div key={prefecture.prefCode}>
+        <div className="checkbox" key={prefecture.prefCode}>
           <input
+            className=".checkbox"
             type="checkbox"
             name="Prefecture Name"
             id={prefecture.prefCode}
