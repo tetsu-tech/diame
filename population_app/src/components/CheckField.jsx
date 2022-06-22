@@ -34,19 +34,11 @@ export const Checkfield = (props) => {
       .catch((error) => {});
   };
 
-  const c_prefPopulation = prefPopulation.slice(); //コピーの作成
-
   //Highchartsに代入するため年を配列で取り出す
-  let years = []; //yearの配列
-  c_prefPopulation.forEach((data) => {
-    years.push(data.year);
-  });
+  const years = prefPopulation.map((data) => data.year)
 
   //年と対応した人口を配列で取り出す
-  let populations = []; //空配列
-  c_prefPopulation.forEach((data) => {
-    populations.push(data.value);
-  });
+  const populations = prefPopulation.map((data) => data.value)
 
   //Highchartaのグラフ変数
   const chartOptions = {
