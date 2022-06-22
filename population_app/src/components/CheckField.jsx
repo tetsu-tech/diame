@@ -9,11 +9,11 @@ export const Checkfield = (props) => {
 
   const [prefectures, setPrefectures] = useState([]); 
   const [prefPopulation, setPrefPopulation] = useState([]);
-
+  const baseUrl = 'https://opendata.resas-portal.go.jp/api'
   //都道府県の一覧の取得
   useEffect(() => {
     axios
-      .get("https://opendata.resas-portal.go.jp/api/v1/prefectures", {
+      .get(`${baseUrl}/v1/prefectures`, {
         headers: { "X-API-KEY": API_KEY },
       })
       .then((res) => {
@@ -25,7 +25,7 @@ export const Checkfield = (props) => {
   
   //clickされたチェックボックスのprefCodeを取得してURLに代入し、prefPopulationにsetする関数
   const handleClickCheckbox = (value) => {
-    const prefURL = `https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear?prefCode=${value}`;
+    const prefURL = `${baseUrl}/v1/population/composition/perYear?prefCode=${value}`;
     axios
       .get(prefURL, { headers: { "X-API-KEY": API_KEY } })
       .then((res) => {
