@@ -4,12 +4,14 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import "../App.css";
 import { slackNotifier } from "../libs/slackClient";
+import { CurrentPref } from "./CurrentPref";
 
 export const Checkfield = (props) => {
   const API_KEY = process.env.REACT_APP_RESAS_API_KEY;
 
   const [prefectures, setPrefectures] = useState([]);
   const [prefPopulation, setPrefPopulation] = useState([]);
+  const [currentPref, setCurrentPref] = useState([]);
   const baseUrl = "https://opendata.resas-portal.go.jp/api";
   //都道府県の一覧の取得
   useEffect(() => {
@@ -20,12 +22,15 @@ export const Checkfield = (props) => {
       .then((res) => {
         setPrefectures(res.data.result);
       })
-      .catch((error) => {});
+      .catch((error) => {
+        slackNotifier(error.message);
+      });
   }, [API_KEY]);
 
   //clickされたチェックボックスのprefCodeを取得してURLに代入し、prefPopulationにsetする関数
   const handleClickCheckbox = (value) => {
-    const prefURL = `${baseUrl}/v1/population/composition/perYear?prefCode=${value}`;
+    setCurrentPref(value);
+    const prefURL = `${baseUrl}/v1/population/composition/perYear?prefCode=${value.prefCode}`;
     axios
       .get(prefURL, { headers: { "X-API-KEY": API_KEY } })
       .then((res) => {
@@ -48,6 +53,9 @@ export const Checkfield = (props) => {
       categories: years,
     },
     series: [{ data: populations }],
+    title: {
+      text: currentPref.prefName,
+    },
   };
 
   return (
@@ -59,12 +67,13 @@ export const Checkfield = (props) => {
             type="checkbox"
             name="Prefecture Name"
             id={prefecture.prefCode}
-            onClick={() => handleClickCheckbox(prefecture.prefCode)}
+            onClick={() => handleClickCheckbox(prefecture)}
           />
           <label>{prefecture.prefName}</label>
         </div>
       ))}
       <HighchartsReact highcharts={Highcharts} options={chartOptions} />
+      <CurrentPref test={currentPref.prefName} />
     </div>
   );
 };
