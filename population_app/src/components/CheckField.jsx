@@ -64,7 +64,7 @@ export const Checkfield = (props) => {
         <div className="checkbox" key={prefecture.prefCode}>
           <input
             className=".checkbox"
-            type="checkbox"
+            type="radio"
             name="Prefecture Name"
             id={prefecture.prefCode}
             onClick={() => handleClickCheckbox(prefecture)}
