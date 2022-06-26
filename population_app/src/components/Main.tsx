@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { Checkfield } from './CheckField';
 import { Test } from './Test';
+import { JsxTest } from './JsxTest';
 
 interface Props {};
 
@@ -10,7 +11,7 @@ interface Prefecture {
   prefName: String;
 };
 
-export const Main: React.FC<Props> = (props: Props) => {
+export const Main: React.FC<Props> = () => {
   const API_KEY = process.env.REACT_APP_RESAS_API_KEY;
   const [prefectures, setPrefectures] = useState<Prefecture[]>([]); //県名初期化
   
@@ -23,7 +24,12 @@ export const Main: React.FC<Props> = (props: Props) => {
       .then((res)=>{
         setPrefectures(res.data.result);
       })
-      .catch((error)=>{})
+      .catch((error)=>{
+        /* Todo: tsconfigでnoUnusedLocalsをtrueにしているためconsoleに表示させている
+                 Issue#8でkipに対応してもらう
+        */
+        console.log(error)
+      })
     }
   }, [])
 
@@ -31,8 +37,9 @@ export const Main: React.FC<Props> = (props: Props) => {
 
   return (
     <>
-      {/* テスト用のコンポーネントのため、後で消す */}
+      {/* Todo: テスト用のコンポーネントのため、後で消す */}
       <Test />
+      <JsxTest />
       <Checkfield prefectures={prefectures} />
     </>
   )
