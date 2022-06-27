@@ -8,7 +8,7 @@ export const Checkfield = (props) => {
   const API_KEY = process.env.REACT_APP_RESAS_API_KEY;
 
   const [prefectures, setPrefectures] = useState([]); 
-  const [prefPopulation, setPrefPopulation] = useState([]);
+  const [prefPopulations, setPrefPopulation] = useState([]);
   const baseUrl = 'https://opendata.resas-portal.go.jp/api'
   //都道府県の一覧の取得
   useEffect(() => {
@@ -35,10 +35,10 @@ export const Checkfield = (props) => {
   };
 
   //Highchartsに代入するため年を配列で取り出す
-  const years = prefPopulation.map((data) => data.year)
+  const years = prefPopulations.map((prefPopulation) => prefPopulation.year)
 
   //年と対応した人口を配列で取り出す
-  const populations = prefPopulation.map((data) => data.value)
+  const populations = prefPopulations.map((prefPopulation) => prefPopulation.value)
 
   //Highchartaのグラフ変数
   const chartOptions = {
