@@ -1,6 +1,15 @@
 import React from "react";
 
-export const Checkfield = (props) => {
+interface Props {
+  prefectures: Prefecture[];
+}
+
+interface Prefecture {
+  prefCode: number;
+  prefName: String;
+};
+
+export const Checkfield: React.FC<Props> = (props: Props) => {
   return (
     <div>
       {props.prefectures.map((prefecture) => (
