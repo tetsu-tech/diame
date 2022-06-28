@@ -1,10 +1,10 @@
 import React from "react";
-import { Main } from "./components/Main";
+import { Checkfield } from "./components/CheckField";
 
 export default function App() {
   return (
     <div>
-      <Main />
+      <Checkfield />
     </div>
   );
 }
